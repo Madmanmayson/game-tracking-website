@@ -1,0 +1,6 @@
+#Composer Ignores
+vendor/
+composer.phar
+
+#Fat Free Framework Ignores
+tmp/
