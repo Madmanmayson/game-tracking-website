@@ -8,7 +8,13 @@
 
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
-    RewriteRule ^api/ api.php [L,NC]
+
+    # Redirect everything under api routes to the apporpriate router
+    # Taken from:
+    # https://stackoverflow.com/questions/39185802/configuring-htaccess-file-to-serve-angular-and-api-routes
+    # https://stackoverflow.com/questions/26299133/how-can-i-redirect-api-requests-to-another-file
+    RewriteCond %{REQUEST_URI} ^/api/
+    RewriteRule ^api/ api-router.php [L,NC]
 
 
     # Excludes existing directories and files
