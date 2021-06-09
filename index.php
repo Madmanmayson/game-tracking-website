@@ -15,6 +15,16 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
+$f3->route('GET|POST /login', function(){
+    $view = new Template();
+    echo $view->render('views/login.html');
+});
+
+$f3->route('GET|POST /register', function(){
+    $view = new Template();
+    echo $view->render('views/registration.html');
+});
+
 $f3->route('GET /profile', function(){
     //TODO check if the username is set in the session. If so, redirect to their profile, otherwise redirect to login or profile search
 
