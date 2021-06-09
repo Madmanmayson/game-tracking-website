@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 01, 2021 at 06:27 PM
+-- Generation Time: Jun 09, 2021 at 06:01 PM
 -- Server version: 10.2.38-MariaDB
 -- PHP Version: 7.3.28
 
@@ -30,9 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `userId` int(11) NOT NULL,
-  `username` varchar(32) DEFAULT NULL,
-  `password` char(64) DEFAULT NULL,
-  `isAdmin` tinyint(1) DEFAULT NULL
+  `username` varchar(32) NOT NULL,
+  `password` char(64) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
