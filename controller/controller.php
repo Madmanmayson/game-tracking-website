@@ -33,7 +33,7 @@ class Controller
         //TODO check if the username is set in the session. If so, redirect to their profile, otherwise redirect to login or profile search
 
         $view = new Template();
-        echo $view->render('views/home.html');
+        echo $view->render('views/profile.html');
     }
 
     function search()

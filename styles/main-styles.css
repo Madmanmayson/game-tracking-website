@@ -1,0 +1,16 @@
+.filter-bar{
+    background-color: darkgray;
+    border: 1px solid black;
+    border-left: 0;
+}
+
+.filter{
+    padding: .5rem 1rem;
+    text-align: center;
+    border-left: 1px solid black;
+}
+
+.filter:hover{
+    background-color: rgba(0,0,0,.2);
+    cursor: pointer;
+}
