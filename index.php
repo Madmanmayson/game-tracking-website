@@ -19,17 +19,12 @@ $f3->route('GET|POST /login', function(){
     $GLOBALS['con']->login();
 });
 
-<<<<<<< Updated upstream
 $f3->route('GET|POST /register', function(){
     $GLOBALS['con']->registration();
 });
 
 $f3->route('GET /profile', function(){
     $GLOBALS['con']->profile();
-=======
-    $view = new Template();
-    echo $view->render('views/profile.html');
->>>>>>> Stashed changes
 });
 
 $f3->route('GET /search', function(){
