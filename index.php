@@ -9,32 +9,26 @@ session_start();
 
 //instantiate fat-free
 $f3 = Base::instance();
+$con = new Controller($f3);
 
 $f3->route('GET /', function(){
-    $view = new Template();
-    echo $view->render('views/home.html');
+    $GLOBALS['con']->home();
 });
 
 $f3->route('GET|POST /login', function(){
-    $view = new Template();
-    echo $view->render('views/login.html');
+    $GLOBALS['con']->login();
 });
 
 $f3->route('GET|POST /register', function(){
-    $view = new Template();
-    echo $view->render('views/registration.html');
+    $GLOBALS['con']->registration();
 });
 
 $f3->route('GET /profile', function(){
-    //TODO check if the username is set in the session. If so, redirect to their profile, otherwise redirect to login or profile search
-
-    $view = new Template();
-    echo $view->render('views/home.html');
+    $GLOBALS['con']->profile();
 });
 
 $f3->route('GET /search', function(){
-    $view = new Template();
-    echo $view->render('views/home.html');
+    $GLOBALS['con']->search();
 });
 
 $f3->run();
