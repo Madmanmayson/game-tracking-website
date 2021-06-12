@@ -54,20 +54,23 @@ $f3->route('POST /api/user/create', function($f3){
 $f3->route('GET /api/user/@username', function($f3, $params){
     $username = $params['username'];
 
-    $query = 'SELECT * FROM users WHERE username = :username';
+    $query = 'SELECT userId, username, email FROM users WHERE username = :username';
 
     $statement = $GLOBALS['cnxn']->prepare($query);
     $statement->bindParam(':username', $username, PDO::PARAM_STR);
 
-    if($statement->execute()){
+    $statement->execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+
+    if($result){
         http_response_code(200);
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         echo json_encode($result);
     } else {
         http_response_code(404);
 
-        echo json_encode(array('message' => $statement->errorInfo()));
+        echo json_encode(array('message' => 'Username does not exist.'));
     }
 });
 
