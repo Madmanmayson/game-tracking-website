@@ -7,7 +7,6 @@ require_once('vendor/autoload.php');
 
 session_start();
 
-
 //instantiate fat-free
 $f3 = Base::instance();
 $con = new Controller($f3);
@@ -25,7 +24,17 @@ $f3->route('GET|POST /register', function(){
 });
 
 $f3->route('GET /profile', function(){
-    $GLOBALS['con']->profile();
+    if($_SESSION['user']->getUserName() != ""){
+        header('location: profile/' . $_SESSION['user']->getUserName());
+    }
+    else {
+        $view = new Template();
+        echo $view->render('views/no-profile.html');
+    }
+});
+
+$f3->route('GET /profile/@username', function($f3, $params){
+    $GLOBALS['con']->profile($params['username']);
 });
 
 $f3->route('GET /search', function(){

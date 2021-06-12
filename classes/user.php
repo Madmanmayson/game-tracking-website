@@ -8,7 +8,7 @@ class User
     private $_isAdmin = false;
     private $_email = "";
 
-    function __construct($databaseRow)
+    function __construct($databaseRow = null)
     {
         if(isset($databaseRow['userId'])){
             $this->_userId = $databaseRow['userId'];

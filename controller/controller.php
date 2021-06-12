@@ -28,10 +28,25 @@ class Controller
         echo $view->render('views/registration.html');
     }
 
-    function profile()
+    function profile($username)
     {
-        //TODO check if the username is set in the session. If so, redirect to their profile, otherwise redirect to login or profile search
+        // WHY DO WE NOT HAVE A SHARED SERVER!! STRING MATH IS EVIL TO WORKAROUND THIS PROBLEM!!!
+        $oldPath = $_SERVER['SCRIPT_URI'];
+        $partToRemove = substr($oldPath, strpos($oldPath, 'profile'));
+        $apiPath = substr($oldPath, 0, strlen($oldPath) - strlen($partToRemove));
 
+        $curl = curl_init("{$apiPath}api/user/{$username}");
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        $data = json_decode($result, true);
+        $user = new User($data);
+
+        $this->_f3->set('user', $user);
         $view = new Template();
         echo $view->render('views/profile.html');
     }
