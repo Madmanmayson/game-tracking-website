@@ -21,23 +21,16 @@ $f3 = Base::instance();
 
 //define default route
 //Create a new user
-$f3->route('POST /api/user/create', function($f3){
+$f3->route('POST /api/users', function($f3){
 
     $data = json_decode(file_get_contents("php://input"));
-
-    $user = new User();
-
-    // email, username, password
-    $user->setPassword($data->password);
-    $user->setUserName($data->username);
-    $user->setEmail($data->email);
 
     $query = 'INSERT INTO `users` (username, password, email) VALUES (:username, SHA2(:password, 256), :email)';
 
     $statement = $GLOBALS['cnxn']->prepare($query);
-    $statement->bindParam(':username', $user->getUserName(), PDO::PARAM_STR);
-    $statement->bindParam(':password', $user->getPassword(), PDO::PARAM_STR);
-    $statement->bindParam(':email', $user->getEmail(), PDO::PARAM_STR);
+    $statement->bindParam(':username', $data->username, PDO::PARAM_STR);
+    $statement->bindParam(':password', $data->password, PDO::PARAM_STR);
+    $statement->bindParam(':email', $data->email, PDO::PARAM_STR);
 
     if($statement->execute()){
         http_response_code(201);
@@ -51,7 +44,7 @@ $f3->route('POST /api/user/create', function($f3){
 });
 
 //Get a user based on param
-$f3->route('GET /api/user/@username', function($f3, $params){
+$f3->route('GET /api/users/@username', function($f3, $params){
     $username = $params['username'];
 
     $query = 'SELECT userId, username, email FROM users WHERE username = :username';
@@ -61,7 +54,6 @@ $f3->route('GET /api/user/@username', function($f3, $params){
 
     $statement->execute();
     $result = $statement->fetch(PDO::FETCH_ASSOC);
-
 
     if($result){
         http_response_code(200);
