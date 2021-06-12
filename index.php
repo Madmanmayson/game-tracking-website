@@ -7,6 +7,7 @@ require_once('vendor/autoload.php');
 
 session_start();
 
+
 //instantiate fat-free
 $f3 = Base::instance();
 $con = new Controller($f3);
