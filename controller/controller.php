@@ -24,6 +24,30 @@ class Controller
 
     function registration()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $userName = "";
+            $userPassword = "";
+            $userEmail = "";
+            $userName = $_POST['username'];
+            $userPassword = $_POST['password'];
+            $userEmail = $_POST['email'];
+
+            if (!Validation::validUserName($userName)){
+                $this->_f3->set('errors["username"]',
+                "Please enter an alphanumeric username between 4 and 32 characters");
+            }
+
+            if (!Validation::validPassword($userPassword)){
+                $this->_f3->set('errors["password"]',
+                "Please enter a alphanumeric password at least 6 characters long");
+            }
+
+            if (!Validation::validEmail($userEmail)){
+                $this->_f3->set('errors["email"]',
+                "Please enter a valid email address");
+            }
+        }
+
         $view = new Template();
         echo $view->render('views/registration.html');
     }
