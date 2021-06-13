@@ -17,7 +17,14 @@
                     </div>
                 </div>
             </form>
-            <a class="nav-link" href="/game-tracker/login">Login</a>
+            <check if="{{ isset(@SESSION.user) }}">
+                <true>
+                    <a class="nav-link" href="/game-tracker/logout">Log Out</a>
+                </true>
+                <false>
+                    <a class="nav-link" href="/game-tracker/login">Login</a>
+                </false>
+            </check>
         </div>
     </nav>
 </header>

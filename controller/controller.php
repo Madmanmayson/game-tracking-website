@@ -18,6 +18,7 @@ class Controller
 
     function login()
     {
+        $_SESSION = array();
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $oldPath = $_SERVER['SCRIPT_URI'];
             $partToRemove = substr($oldPath, strpos($oldPath, 'login'));
@@ -33,8 +34,6 @@ class Controller
             if (!curl_errno($curl)) {
                 switch ($http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) {
                     case 200:  # OK
-                        $_SESSION = array();
-
                         if ($data['isAdmin']){
                             $_SESSION['user'] = new Admin($data);
                         }else{
@@ -55,6 +54,11 @@ class Controller
 
         $view = new Template();
         echo $view->render('views/login.html');
+    }
+
+    function logout(){
+        $_SESSION = array();
+        header('location: /game-tracker/');
     }
 
     function registration()
