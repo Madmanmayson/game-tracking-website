@@ -1,37 +1,37 @@
 <include href="views/header.html" />
 
 <body>
+<link href="styles/main-styles.css" rel="stylesheet">
 <include href="views/navbar.html" />
 
-<div class="container pt-5 pb-5" id="registration">
-    <h2>Registration</h2>
-    <form class="login" action="#" method="post">
-        <div class="form-group">
-            <label for="userName">Username
+<div class="container" id="registration">
+    <div class="loginBox">
+        <h2 class="text-center">Registration</h2>
+        <form class="login" action="#" method="post">
+            <div class="form-group">
+                <label for="userName">Username</label>
                 <input class="form-control" id="username" name="username" value="{{ @username }}">
-            </label><br>
-            <check if="{{ isset(@errors['username']) }}">
-                <span class="err">{{ @errors['username'] }}</span>
-            </check>
-        </div>
-        <div class="form-group">
-            <label for="password">Password
+                <check if="{{ isset(@errors['username']) }}">
+                    <span class="err">{{ @errors['username'] }}</span>
+                </check>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password">
-            </label><br>
-            <check if="{{ isset(@errors['password']) }}">
-                <span class="err">{{ @errors['password'] }}</span>
-            </check>
-        </div>
-        <div class="form-group">
-            <label for="email">Email
+                <check if="{{ isset(@errors['password']) }}">
+                    <span class="err">{{ @errors['password'] }}</span>
+                </check>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="{{ @userEmail }}">
-            </label><br>
-            <check if="{{ isset(@errors['email']) }}">
-                <span class="err">{{ @errors['email'] }}</span>
-            </check>
-        </div>
-        <button type="submit" class="btn btn-primary bg-success mt-2">Create Account</button>
-    </form>
+                <check if="{{ isset(@errors['email']) }}">
+                    <span class="err">{{ @errors['email'] }}</span>
+                </check>
+            </div>
+            <button type="submit" class="btn btn-primary bg-success mt-2">Create Account</button>
+        </form>
+    </div>
 </div>
 
 <include href="views/global-scripts.html" />

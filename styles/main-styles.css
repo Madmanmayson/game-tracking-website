@@ -17,5 +17,13 @@
 
 .err {
     color: darkred;
-    padding-left: 1em;
+}
+
+.loginBox{
+    border: 3px solid #205EDF;
+    background-color: #C7D7F7;
+    padding: 1rem;
+    border-radius: 15px;
+    max-width: 390px;
+    margin: 0 auto;
 }
