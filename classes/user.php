@@ -9,20 +9,20 @@ class User
 
     public function __construct($databaseRow = null)
     {
-        if($databaseRow != null){
-            if(isset($databaseRow['userId'])){
+        if ($databaseRow != null) {
+            if (isset($databaseRow['userId'])) {
                 $this->_userId = $databaseRow['userId'];
             }
 
-            if(isset($databaseRow['username'])){
+            if (isset($databaseRow['username'])) {
                 $this->_userName = $databaseRow['username'];
             }
 
-            if(isset($databaseRow['email'])){
+            if (isset($databaseRow['email'])) {
                 $this->_email = $databaseRow['email'];
             }
 
-            if(isset($databaseRow['password'])){
+            if (isset($databaseRow['password'])) {
                 $this->_password = $databaseRow['password'];
             }
         }
@@ -83,23 +83,5 @@ class User
     {
         $this->_password = $password;
     }
-<<<<<<< HEAD
-=======
-
-    /**
-     * @return boolean
-     */
-    public function getIsAdmin()
-    {
-        return $this->_isAdmin;
-    }
-
-    /**
-     * @param boolean $isAdmin
-     */
-    public function setIsAdmin($isAdmin)
-    {
-        $this->_isAdmin = $isAdmin;
-    }
->>>>>>> 71c16eabcc1aeeaafda46d2f991934c292fe25be
 }
+
