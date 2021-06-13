@@ -19,6 +19,29 @@ require_once('vendor/autoload.php');
 //instantiate fat-free
 $f3 = Base::instance();
 
+$f3->route('POST /api/login', function(){
+    $data = json_decode(file_get_contents("php://input"));
+
+    $query = 'SELECT username, userId, isAdmin FROM users WHERE username = :username AND password = SHA2(:password, 256)';
+
+    $statement = $GLOBALS['cnxn']->prepare($query);
+    $statement->bindParam(':username', $data->username, PDO::PARAM_STR);
+    $statement->bindParam(':password', $data->password, PDO::PARAM_STR);
+
+    $statement->execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if($result){
+        http_response_code(200);
+
+        echo json_encode($result);
+    } else {
+        http_response_code(401);
+
+        echo json_encode(array('message' => 'Incorrect username or password. Please try again.'));
+    }
+});
+
 //define default route
 //Create a new user
 $f3->route('POST /api/users', function($f3){
