@@ -18,6 +18,41 @@ class Controller
 
     function login()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $oldPath = $_SERVER['SCRIPT_URI'];
+            $partToRemove = substr($oldPath, strpos($oldPath, 'login'));
+            $apiPath = substr($oldPath, 0, strlen($oldPath) - strlen($partToRemove));
+
+            $curl = curl_init("{$apiPath}api/login");
+
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($_POST));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($curl);
+            $data = json_decode($result, true);
+            if (!curl_errno($curl)) {
+                switch ($http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) {
+                    case 200:  # OK
+                        $_SESSION = array();
+
+                        if ($data['isAdmin']){
+                            $_SESSION['user'] = new Admin($data);
+                        }else{
+                            $_SESSION['user'] = new User($data);
+                        }
+
+                        //route to their profile
+                        header("Location: profile/{$_SESSION['user']->getUserName()}");
+                    default:
+                        //route to an error page
+                        $this->_f3->set('error', $data['message']);
+                }
+            }
+            else{
+                echo curl_error($curl);
+            }
+        }
+
         $view = new Template();
         echo $view->render('views/login.html');
     }
