@@ -83,4 +83,23 @@ class User
     {
         $this->_password = $password;
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * @return boolean
+     */
+    public function getIsAdmin()
+    {
+        return $this->_isAdmin;
+    }
+
+    /**
+     * @param boolean $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->_isAdmin = $isAdmin;
+    }
+>>>>>>> 71c16eabcc1aeeaafda46d2f991934c292fe25be
 }

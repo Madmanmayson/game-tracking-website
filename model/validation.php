@@ -2,13 +2,18 @@
 
 class Validation
 {
-    function validPassword($password)
+    static function validUserName($userName)
+    {
+        return preg_match("/[A-Za-z0-9_-]{4,32}/", $userName);
+    }
+
+    static function validPassword($password)
     {
         return preg_match("/[A-Za-z0-9]{6,}/", $password);
     }
 
-    function validUserName($userName)
+    static function validEmail($email)
     {
-        return preg_match("/[A-Za-z0-9_-]{4,32}/", $userName);
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 }
