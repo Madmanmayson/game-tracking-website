@@ -19,12 +19,12 @@ $f3->route('GET|POST /login', function(){
     $GLOBALS['con']->login();
 });
 
-$f3->route('GET|POST /registration', function(){
+$f3->route('GET|POST /register', function(){
     $GLOBALS['con']->registration();
 });
 
 $f3->route('GET /profile', function(){
-    if($_SESSION['user']->getUserName() != ""){
+    if(isset($_SESSION['user']) && $_SESSION['user']->getUserName() != ""){
         header('location: profile/' . $_SESSION['user']->getUserName());
     }
     else {
