@@ -19,7 +19,7 @@ $f3->route('GET|POST /login', function(){
     $GLOBALS['con']->login();
 });
 
-$f3->route('GET|POST /register', function(){
+$f3->route('GET|POST /registration', function(){
     $GLOBALS['con']->registration();
 });
 
