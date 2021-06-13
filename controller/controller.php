@@ -47,7 +47,7 @@ class Controller
             if (empty($this->_f3->get('errors')))
             {
                 $oldPath = $_SERVER['SCRIPT_URI'];
-                $partToRemove = substr($oldPath, strpos($oldPath, 'profile'));
+                $partToRemove = substr($oldPath, strpos($oldPath, 'registration'));
                 $apiPath = substr($oldPath, 0, strlen($oldPath) - strlen($partToRemove));
 
                 $curl = curl_init("{$apiPath}api/users");

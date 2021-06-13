@@ -9,15 +9,15 @@
         <div class="form-group">
             <label for="userName">Username
                 <input class="form-control" id="username" name="username" value="{{ @username }}">
-            </label>
-            <check if="{{ isset(@errors['userName']) }}">
+            </label><br>
+            <check if="{{ isset(@errors['username']) }}">
                 <span class="err">{{ @errors['username'] }}</span>
             </check>
         </div>
         <div class="form-group">
             <label for="password">Password
                 <input type="password" class="form-control" name="password" id="password">
-            </label>
+            </label><br>
             <check if="{{ isset(@errors['password']) }}">
                 <span class="err">{{ @errors['password'] }}</span>
             </check>
@@ -25,7 +25,7 @@
         <div class="form-group">
             <label for="email">Email
                 <input type="text" class="form-control" id="email" name="email" value="{{ @userEmail }}">
-            </label>
+            </label><br>
             <check if="{{ isset(@errors['email']) }}">
                 <span class="err">{{ @errors['email'] }}</span>
             </check>
