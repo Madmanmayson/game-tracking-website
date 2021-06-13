@@ -89,12 +89,39 @@ $f3->route('GET /api/users/@username', function($f3, $params){
     }
 });
 
-$f3->route('GET /api/*', function($f3, $params){
-    echo var_dump($params) . ' Test';
+$f3->route('PATCH /api/users/@username', function($f3, $params){
+    $data = json_decode(file_get_contents("php://input"));
+
+    //Avatars and images are being sent to the API using Base64 Encoding and thus they have to be handled differently
+    if(isset($data->avatar)){
+        $data = explode(',', $data->avatar); //Split data URI portion from base64 data
+
+        $imagedata = base64_decode($data[1]);
+
+        //Getting MIME type and extension info
+        $finfo = finfo_open();
+        $mimeType = finfo_buffer($finfo, $imagedata, FILEINFO_MIME_TYPE);
+        $mimeExtensions = finfo_buffer($finfo, $imagedata, FILEINFO_EXTENSION);
+        $extension = explode('/', $mimeExtensions)[0]; //Get the first extension of all possible ones for the MIME type
+
+        if(explode('/', $mimeType)[0] != 'image'){
+            http_response_code(400);
+            echo json_encode(array('message' => 'Base64 Image data provided for avatar was not an image.'));
+        }
+
+        $filePath = '/game-tracker/images/' . $params['username'] . '.' . $extension;
+
+        file_put_contents($filePath, $imagedata);
+
+        http_response_code(200);
+        echo json_encode(array('message' => 'Avatar suceesfully updated.'));
+    }
+
+    // TODO Add updating bio and maybe username
 });
 
-$f3->route('GET /profile/@username', function($f3, $params){
-    echo $params['username'];
+$f3->route('POST /api/games', function (){
+
 });
 
 //run fat-free
