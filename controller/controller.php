@@ -1,5 +1,4 @@
 <?php
-
 class Controller
 {
     private $_f3; //Router
@@ -174,11 +173,10 @@ class Controller
     }
 
     function adminAddGame(){
-        //if(!$_SESSION['user'] instanceof Admin){
-        //    header("Location: /game-tracker/");
-        //}
+        if(!$_SESSION['user'] instanceof Admin){
+            header("Location: /game-tracker/");
+        }
 
-        $gamePlatform = array();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if (!Validation::validString($_POST['gameName']))
             {
@@ -207,7 +205,6 @@ class Controller
         }
 
         $this->_f3->set('platforms', dataLayer::getPlatforms());
-        $this->_f3->set('gamePlatform', $gamePlatform);
 
         $view = new Template();
         echo $view->render('views/add-game.html');
