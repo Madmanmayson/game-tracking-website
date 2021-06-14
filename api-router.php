@@ -136,6 +136,7 @@ $f3->route('POST /api/games', function (){
         http_response_code(503);
 
         echo json_encode(array('message' => $statement->errorInfo()));
+        die;
     } else {
 
         //Getting the new game ID
@@ -193,13 +194,48 @@ $f3->route('GET /api/games', function () {
         http_response_code(200);
 
         echo json_encode($output);
-
     } else {
         http_response_code(404);
 
         echo json_encode(array("message" => "No games found."));
     }
+});
 
+$f3->route('GET /api/games/@gameId', function($f3, $params){
+   $query = "SELECT * FROM games WHERE gameId = :gameId LIMIT 1";
+
+   $statement = $GLOBALS['cnxn']->prepare($query);
+   $statement->bindParam(':gameId', $params['gameId'], PDO::PARAM_INT);
+
+   if(!$statement->execute()){
+       http_response_code(404);
+
+       echo json_encode(array("message" => "Game Id doesn't exist."));
+       die;
+   }
+
+    $gameData = $statement->fetch(PDO::FETCH_ASSOC);
+
+    $platformQuery = "SELECT platformName FROM platforms
+INNER JOIN gamePlatforms ON platforms.platformId = gamePlatforms.platformId
+WHERE gameId = :gameId;";
+
+    $statement = $GLOBALS['cnxn']->prepare($platformQuery);
+    $statement->bindParam(':gameId', $params['gameId'], PDO::PARAM_INT);
+
+
+    if(!$statement->execute()){
+        http_response_code(404);
+
+        echo json_encode(array("message" => "Game Id doesn't exist."));
+        die;
+    }
+    $platforms = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+    $gameData['platforms'] = $platforms;
+
+    http_response_code(200);
+
+    echo json_encode($gameData);
 });
 
 //run fat-free
