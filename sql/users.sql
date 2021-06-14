@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 09, 2021 at 06:01 PM
+-- Generation Time: Jun 13, 2021 at 08:20 PM
 -- Server version: 10.2.38-MariaDB
 -- PHP Version: 7.3.28
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `greatben_grc`
+-- Database: `dhardygr_game`
 --
 
 -- --------------------------------------------------------
@@ -29,12 +29,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
-  `userId` int(11) NOT NULL,
-  `username` varchar(32) NOT NULL,
-  `password` char(64) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `isAdmin` tinyint(1) NOT NULL
+                         `userId` int(11) NOT NULL,
+                         `username` varchar(32) NOT NULL,
+                         `password` char(64) NOT NULL,
+                         `email` varchar(50) NOT NULL,
+                         `isAdmin` tinyint(1) NOT NULL DEFAULT 0,
+                         `bio` varchar(500) DEFAULT NULL,
+                         `avatar` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 --
 -- Indexes for dumped tables
@@ -44,7 +47,8 @@ CREATE TABLE `users` (
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userId`);
+    ADD PRIMARY KEY (`userId`),
+    ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -54,7 +58,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
