@@ -70,7 +70,7 @@ $f3->route('POST /api/users', function($f3){
 $f3->route('GET /api/users/@username', function($f3, $params){
     $username = $params['username'];
 
-    $query = 'SELECT userId, username, email FROM users WHERE username = :username';
+    $query = 'SELECT userId, username, email, avatar FROM users WHERE username = :username';
 
     $statement = $GLOBALS['cnxn']->prepare($query);
     $statement->bindParam(':username', $username, PDO::PARAM_STR);
@@ -93,7 +93,7 @@ $f3->route('PATCH /api/users/@username', function($f3, $params){
     $data = json_decode(file_get_contents("php://input"));
 
     //Avatars and images are being sent to the API using Base64 Encoding and thus they have to be handled differently
-    if(isset($data->avatar)){
+    if(isset($data->avatar)) {
         $data = explode(',', $data->avatar); //Split data URI portion from base64 data
 
         $imagedata = base64_decode($data[1]);
@@ -104,24 +104,35 @@ $f3->route('PATCH /api/users/@username', function($f3, $params){
         $mimeExtensions = finfo_buffer($finfo, $imagedata, FILEINFO_EXTENSION);
         $extension = explode('/', $mimeExtensions)[0]; //Get the first extension of all possible ones for the MIME type
 
-        if(explode('/', $mimeType)[0] != 'image'){
+        if (explode('/', $mimeType)[0] != 'image') {
             http_response_code(400);
             echo json_encode(array('message' => 'Base64 Image data provided for avatar was not an image.'));
         }
 
         $filePath = '/game-tracker/images/' . $params['username'] . '.' . $extension;
+        $serverPath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
 
-        file_put_contents($filePath, $imagedata);
+        file_put_contents($serverPath, $imagedata);
 
-        http_response_code(200);
-        echo json_encode(array('message' => 'Avatar suceesfully updated.'));
+        $query = "UPDATE users SET avatar = :filePath WHERE username = :username";
+
+        $statement = $GLOBALS['cnxn']->prepare($query);
+        $statement->bindParam(':filePath', $filePath, PDO::PARAM_STR);
+        $statement->bindParam(':username', $params['username'], PDO::PARAM_STR);
+
+        if ($statement->execute()) {
+            http_response_code(200);
+            echo json_encode(array('path' => $filePath, 'message' => 'Avatar suceesfully updated.'));
+        } else {
+            http_response_code(503);
+            echo json_encode(array('message' => 'Failed to update avatar'));
+        }
     }
-
     // TODO Add updating bio and maybe username
 });
 
 $f3->route('POST /api/games', function (){
-    $data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents('php://input'));
 
     //Create game in database
     $query = "INSERT INTO games (gameName, description, genre) VALUES (:gameName, :description, :genre)";
@@ -164,7 +175,7 @@ $f3->route('POST /api/games', function (){
         }
         http_response_code(201);
 
-        echo json_encode(array('message' => 'Game created successfully'));
+        echo json_encode(array('gameId' => $gameId, 'message' => 'Game created successfully'));
     }
 });
 

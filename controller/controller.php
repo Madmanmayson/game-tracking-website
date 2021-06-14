@@ -131,7 +131,7 @@ class Controller
         $partToRemove = substr($oldPath, strpos($oldPath, 'profile'));
         $apiPath = substr($oldPath, 0, strlen($oldPath) - strlen($partToRemove));
 
-        $curl = curl_init("{$apiPath}api/user/{$username}");
+        $curl = curl_init("{$apiPath}api/users/{$username}");
 
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         //curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);

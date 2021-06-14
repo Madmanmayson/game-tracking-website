@@ -6,6 +6,7 @@ class User
     private $_userName = "";
     private $_password = "";
     private $_email = "";
+    private $_avatar = "";
 
     public function __construct($databaseRow = null)
     {
@@ -25,7 +26,26 @@ class User
             if (isset($databaseRow['password'])) {
                 $this->_password = $databaseRow['password'];
             }
+            if (isset($databaseRow['avatar'])) {
+                $this->_avatar = $databaseRow['avatar'];
+            }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return $this->_avatar;
+    }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar(string $avatar): void
+    {
+        $this->_avatar = $avatar;
     }
 
     /**
