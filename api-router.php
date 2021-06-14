@@ -167,5 +167,40 @@ $f3->route('POST /api/games', function (){
     }
 });
 
+$f3->route('GET /api/games', function () {
+
+    $query = "SELECT * FROM games";
+
+    if(isset($_GET['search'])){
+        $query .= " WHERE gameName LIKE :search";
+
+        $statement = $GLOBALS['cnxn']->prepare($query);
+        $searchString = "%{$_GET['search']}%";
+        $statement->bindParam(':search', $searchString, PDO::PARAM_STR);
+    } else {
+        $statement = $GLOBALS['cnxn']->prepare($query);
+    }
+
+    $statement->execute();
+
+    if($statement->rowCount() > 0){
+        $output = array();
+
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            array_push($output, $row);
+        }
+
+        http_response_code(200);
+
+        echo json_encode($output);
+
+    } else {
+        http_response_code(404);
+
+        echo json_encode(array("message" => "No games found."));
+    }
+
+});
+
 //run fat-free
 $f3->run();
