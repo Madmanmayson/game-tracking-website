@@ -7,6 +7,26 @@ class Game
     private $_description;
     private $_genre;
 
+    public function __construct($databaseRow = null){
+        if ($databaseRow != null) {
+            if (isset($databaseRow['gameId'])) {
+                $this->_gameId = $databaseRow['gameId'];
+            }
+
+            if (isset($databaseRow['gameName'])) {
+                $this->_gameName = $databaseRow['gameName'];
+            }
+
+            if (isset($databaseRow['description'])) {
+                $this->_description = $databaseRow['description'];
+            }
+
+            if (isset($databaseRow['genre'])) {
+                $this->_genre = $databaseRow['genre'];
+            }
+        }
+    }
+
     /**
      * @return int
      */

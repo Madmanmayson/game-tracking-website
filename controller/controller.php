@@ -53,6 +53,26 @@ class Controller
 
     function search()
     {
+        $oldPath = $_SERVER['SCRIPT_URI'];
+        $partToRemove = substr($oldPath, strpos($oldPath, 'search'));
+        $apiPath = substr($oldPath, 0, strlen($oldPath) - strlen($partToRemove));
+
+        $curl = curl_init("{$apiPath}api/games?search=" . $_GET['search']);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        $data = json_decode($result, true);
+
+        $games = array();
+
+        foreach($data as $row){
+            $games[] = new Game($row);
+        }
+
+        $this->_f3->set('games', $games);
+        $this->_f3->set('search', (!empty($_GET['search'])) ? $_GET['search'] . "'s " : "");
         $view = new Template();
         echo $view->render('views/search.html');
     }

@@ -171,7 +171,7 @@ $f3->route('GET /api/games', function () {
 
     $query = "SELECT * FROM games";
 
-    if(isset($_GET['search'])){
+    if(isset($_GET['search']) && !empty($_GET['search'])){
         $query .= " WHERE gameName LIKE :search";
 
         $statement = $GLOBALS['cnxn']->prepare($query);

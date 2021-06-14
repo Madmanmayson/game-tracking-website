@@ -3,6 +3,46 @@
 <body>
 <include href="views/navbar.html" />
 
+<div class="container mt-4">
+    <style>
+        .game-box{
+            display: block;
+            margin: 0 .75rem 1rem .75rem;
+            padding: .5rem 1rem;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
+        a.game-box{
+            color:black;
+            text-decoration: none;
+        }
+
+        a.game-box:hover{
+            background-color: rgba(0, 0, 0, .1);
+        }
+    </style>
+    <h2>{{ ucfirst(@search) }}Search Results</h2>
+
+    <form class="mb-4 w-100" method="get" action="/game-tracker/search">
+        <div class="input-group">
+            <input name="search" type="text" class="form-control" placeholder="Search for a game...">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <repeat group="{{ @games }}" value="{{ @game }}">
+        <a class="game-box" href="/game-tracker/games/{{ @game->getGameId() }}">
+            <div class="d-flex flex-column">
+                <span><b>{{ @game->getGameName() }}</b> - {{ @game->getGenre() }}</span>
+                <p class="mb-1">{{ @game->getDescription() }}</p>
+            </div>
+        </a>
+    </repeat>
+</div>
+
 
 <include href="views/footer.html" />
 <include href="views/global-scripts.html" />
