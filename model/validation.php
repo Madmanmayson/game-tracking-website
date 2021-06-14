@@ -22,16 +22,17 @@ class Validation
         $validPlatform = dataLayer::getPlatforms();
         if (!empty($platforms))
         {
-            foreach ($platforms as $platform)
+            foreach ($platforms as $platform_id)
             {
-                if (!in_array($platform, $validPlatform))
+                if (!array_key_exists($platform_id, $validPlatform))
                 {
                     return false;
                 }
             }
             return true;
+        }else{
+            return false;
         }
-        return false;
     }
 
     static function validString($string)
