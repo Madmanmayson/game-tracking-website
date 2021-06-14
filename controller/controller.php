@@ -197,7 +197,7 @@ class Controller
 
             if (!Validation::validPlatform($_POST['platforms']))
             {
-                $this->_f3->set('errors["platform"]', "Only valid platforms please");
+                $this->_f3->set('errors["platform"]', "Please select at least one valid platform");
             }
 
             if (empty($this->_f3->get('errors')))

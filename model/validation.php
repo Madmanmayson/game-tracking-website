@@ -29,8 +29,9 @@ class Validation
                     return false;
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     static function validString($string)
