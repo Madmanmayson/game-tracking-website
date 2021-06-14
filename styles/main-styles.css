@@ -25,7 +25,7 @@
     padding: 1rem;
     border-radius: 15px;
     max-width: 390px;
-    margin: 0 auto;
+    margin: 100px auto 0 auto;
 }
 
 .icon{
@@ -68,7 +68,7 @@ nav {
 }
 
 #carousel_container{
-    max-width: 1600px;
+    max-width: 1700px;
     margin-top: 0;
 }
 
