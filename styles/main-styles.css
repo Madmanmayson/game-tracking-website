@@ -28,7 +28,6 @@
 }
 
 .loginBox{
-    display: block;
     border: 3px solid #924038;
     background-color: #808080;
     padding: 1rem;
@@ -38,6 +37,7 @@
 }
 
 a.loginBox{
+    display: block;
     text-decoration: none;
     color: white;
     text-align: center;
@@ -113,13 +113,23 @@ nav {
     overflow: hidden;
 }
 
+.carousel-container{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    max-width: 1600px;
+    padding-bottom: 1.5rem;
+}
+
 .container{
     background-color: rgba(255, 255, 255, 0.8);
     max-width: 1600px;
-}
 
-.short_container{
-    padding-bottom: 350px;
+    padding-bottom: 3rem;
+    min-height: calc(100vh - 67.6px - 148px);
 }
 
 .list{
@@ -132,4 +142,86 @@ nav {
     display: flex;
     padding: 10px 16px 10px 0;
     border-bottom: 1px solid #205EDF;
+}
+
+.profile-picture{
+    width: 200px;
+    height: 200px;
+}
+
+.overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.dialog-container{
+    position: fixed;
+    padding: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 3;
+    min-width: 40%;
+    max-width: 80%;
+    max-height: 80%;
+    background-color: white;
+}
+
+.dialog-container.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.add-box{
+    background-color: #85EA92;
+    display: block;
+    margin: 1.5rem 10%;
+    padding: .5rem 1rem;
+    border: 2px solid #12B347;
+    border-radius: 10px;
+}
+
+.game-box{
+    display: block;
+    margin: 0 .75rem 1rem .75rem;
+    padding: .5rem 1rem;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+a.game-box, a.add-box{
+    color:black;
+    text-decoration: none;
+}
+
+a.game-box:hover{
+    background-color: rgba(0, 0, 0, .1);
+}
+
+a.add-box:hover{
+    background-color: #62E473;
 }

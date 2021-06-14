@@ -145,6 +145,7 @@ class Controller
                     $this->_f3->set('user', $user);
                     $view = new Template();
                     echo $view->render('views/profile.html');
+                    break;
                 default:
                     $view = new Template();
                     echo $view->render('views/no-profile.html');
