@@ -180,7 +180,7 @@ class Controller
 
         $gamePlatform = array();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if (!Validation::validString($_POST['title']))
+            if (!Validation::validString($_POST['gameName']))
             {
                 $this->_f3->set('errors["title"]', "Please enter a title");
             }
