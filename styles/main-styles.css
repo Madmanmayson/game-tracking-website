@@ -60,6 +60,7 @@ body {
     width: 100%;
     background-image: url("/game-tracker/images/controllers.png");
     background-repeat: repeat repeat;
+    overflow-x: hidden;
 }
 
 nav {
