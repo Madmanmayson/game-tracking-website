@@ -16,12 +16,12 @@
 }
 
 .err {
-    color: darkred;
+    color: #E9827D;
 }
 
 .loginBox{
-    border: 3px solid #205EDF;
-    background-color: #C7D7F7;
+    border: 3px solid #924038;
+    background-color: #808080;
     padding: 1rem;
     border-radius: 15px;
     max-width: 390px;
@@ -36,7 +36,21 @@
 .footer {
     width: 100%;
     padding: 1.25em 0 0 0;
-    background-color: #C7D7F7;
+    background-color: #808080;
+}
+
+.footer-container{
+    color: white;
+}
+
+.bi{
+    color: white;
+}
+
+.btn{
+    background-color: #924038;
+    border-color: #924038;
+    color: white;
 }
 
 body {
@@ -44,10 +58,18 @@ body {
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
+    background-image: url("/game-tracker/images/controllers.png");
+    background-repeat: repeat repeat;
 }
 
 nav {
-    background-color: #C7D7F7;
+    background-color: #808080;
+}
+
+.navbar-left{
+    justify-content: left;
+    margin-right: auto;
+    margin-left: 0;
 }
 
 .carousel-caption {
@@ -60,16 +82,20 @@ nav {
 }
 
 .carousel-imageContainer{
-    height: 350px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-#carousel_container{
-    max-width: 1700px;
-    margin-top: 0;
+.container{
+    background-color: rgba(255, 255, 255, 0.8);
+    max-width: 1600px;
+}
+
+.short_container{
+    padding-bottom: 350px;
 }
 
 .list{

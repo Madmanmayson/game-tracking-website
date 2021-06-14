@@ -1,30 +1,42 @@
 <header>
     <nav class="navbar navbar-expand navbar-light">
-        <a class="navbar-brand" href="/game-tracker/">My Game List</a>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/game-tracker/"><h3>My Game List</h3></a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <!-- Left Side Anchors -->
+                <li><a class="nav-link" href="/game-tracker/"><h4>Home</h4></a></li>
+                <li><a class="nav-link" href="/game-tracker/profile"><h4>Profile</h4></a></li>
+                <li><a class="nav-link" href="/game-tracker/search"><h4>Games</h4></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Right Side Anchors -->
+                <li><form class="" method="get" action="/game-tracker/search">
+                    <div class="input-group input-group-lg">
+                        <input name="search" type="text" class="form-control" placeholder="Search for a game...">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form></li>
+                <li><check if="{{ isset(@SESSION.user) }}">
+                    <true>
+                        <a class="nav-link" href="/game-tracker/logout"><h4>Log Out</h4></a>
+                    </true>
+                    <false>
+                        <a class="nav-link" href="/game-tracker/login"><h4>Login</h4></a>
+                    </false>
+                </check></li>
+            </ul>
+        </div>
+
+
         <div class="navbar-nav flex-row collapse navbar-collapse">
 
-            <!-- Left Side Anchors -->
-            <a class="nav-link" href="/game-tracker/">Home</a>
-            <a class="nav-link" href="/game-tracker/profile">Profile</a>
-            <a class="nav-link mr-auto" href="/game-tracker/search">Games</a>
 
-            <!-- Right Side Anchors -->
-            <form class="" method="get" action="/game-tracker/search">
-                <div class="input-group">
-                    <input name="search" type="text" class="form-control" placeholder="Search for a game...">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
-            <check if="{{ isset(@SESSION.user) }}">
-                <true>
-                    <a class="nav-link" href="/game-tracker/logout">Log Out</a>
-                </true>
-                <false>
-                    <a class="nav-link" href="/game-tracker/login">Login</a>
-                </false>
-            </check>
+
+
         </div>
     </nav>
 </header>

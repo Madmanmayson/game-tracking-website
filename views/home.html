@@ -4,44 +4,44 @@
 <include href="views/navbar.html" />
 
 <!-- Content goes here -->
-<div class="container" id="carousel_container">
-    <div id="carousel" class="carousel slide" data-ride="carousel">
+<div class="container">
+    <div id="carousel" class="carousel slide d-none d-md-block" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carousel" data-slide-to="0" class="active"></li>
             <li data-target="#carousel" data-slide-to="1"></li>
             <li data-target="#carousel" data-slide-to="2"></li>
             <li data-target="#carousel" data-slide-to="3"></li>
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
                 <div class="carousel-imageContainer">
-                    <img class="d-block w-100" src="/game-tracker/images/biomutant.jpg" alt="BioMutant">
+                    <img class="d-block align-content-center w-100" src="/game-tracker/images/biomutant.jpg" alt="BioMutant">
                 </div>
-                <div class="carousel-caption d-none d-md-block">
+                <div class="carousel-caption">
                     <h3>Biomutant</h3>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="carousel-imageContainer">
-                    <img class="d-block w-100" src="/game-tracker/images/deathloop.jpg" alt="DeathLoop">
+                    <img class="d-block align-content-center w-100" src="/game-tracker/images/deathloop.jpg" alt="DeathLoop">
                 </div>
-                <div class="carousel-caption d-none d-md-block">
+                <div class="carousel-caption">
                     <h3>Deathloop</h3>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="carousel-imageContainer">
-                    <img class="d-block w-100" src="/game-tracker/images/ratchet.jpg" alt="Ratchet and Clank: A Rift Apart">
+                    <img class="d-block align-content-center w-100" src="/game-tracker/images/ratchet.jpg" alt="Ratchet and Clank: A Rift Apart">
                 </div>
-                <div class="carousel-caption d-none d-md-block">
+                <div class="carousel-caption">
                     <h3>Ratchet & Clank</h3>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="carousel-imageContainer">
-                    <img class="d-block w-100" src="/game-tracker/images/farcry6.jpg" alt="Far Cry 6">
+                    <img class="d-block align-content-center w-100" src="/game-tracker/images/farcry6.jpg" alt="Far Cry 6">
                 </div>
-                <div class="carousel-caption d-none d-md-block">
+                <div class="carousel-caption">
                     <h3>Far Cry 6</h3>
                 </div>
             </div>
@@ -59,7 +59,7 @@
 <div class="container">
     <div class="row loginBox mt-1 mb-2 mw-100">
         <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
-            <a class="btn btn-primary" href="/game-tracker/registration">
+            <a class="btn" href="/game-tracker/registration">
                 Create an account!
             </a>
         </div>
@@ -74,8 +74,6 @@
             </form>
         </div>
     </div>
-</div>
-<div class="container">
     <div class="row">
         <div class="col-md-8">
             <section>
@@ -222,7 +220,7 @@
             </section>
         </div>
     </div>
-</div>
+</div></div>
 <include href="views/footer.html"/>
 <include href="views/global-scripts.html" />
 </body>
