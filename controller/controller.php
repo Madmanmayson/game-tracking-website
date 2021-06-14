@@ -136,14 +136,25 @@ class Controller
         //curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($curl);
+        if (!curl_errno($curl)) {
+            switch ($http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) {
+                case 200:  # OK
+                    $data = json_decode($result, true);
+                    if(isset($data['message']))
+                        $user = new User($data);
+
+                    $this->_f3->set('user', $user);
+                    $view = new Template();
+                    echo $view->render('views/profile.html');
+                default:
+                    $view = new Template();
+                    echo $view->render('views/no-profile.html');
+            }
+        }
+        else{
+            echo curl_error($curl);
+        }
         curl_close($curl);
-
-        $data = json_decode($result, true);
-        $user = new User($data);
-
-        $this->_f3->set('user', $user);
-        $view = new Template();
-        echo $view->render('views/profile.html');
     }
 
     function search()

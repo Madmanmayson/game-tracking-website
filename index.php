@@ -28,8 +28,13 @@ $f3->route('GET|POST /registration', function(){
 });
 
 $f3->route('GET /profile', function(){
+    if(isset($_GET['username'])){
+        header('location: profile/' . $_GET['username']);
+        die;
+    }
     if(isset($_SESSION['user']) && $_SESSION['user']->getUserName() != ""){
         header('location: profile/' . $_SESSION['user']->getUserName());
+        die;
     }
     else {
         $view = new Template();
