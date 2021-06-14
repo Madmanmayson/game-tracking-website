@@ -109,7 +109,7 @@ $f3->route('PATCH /api/users/@username', function($f3, $params){
             echo json_encode(array('message' => 'Base64 Image data provided for avatar was not an image.'));
         }
 
-        $filePath = '/game-tracker/images/' . $params['username'] . '.' . $extension;
+        $filePath = '/game-tracker/avatars/' . $params['username'] . '.' . $extension;
         $serverPath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
 
         file_put_contents($serverPath, $imagedata);

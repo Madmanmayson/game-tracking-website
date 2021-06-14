@@ -140,9 +140,8 @@ class Controller
             switch ($http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
                     $data = json_decode($result, true);
-                    if(isset($data['message']))
-                        $user = new User($data);
 
+                    $user = new User($data);
                     $this->_f3->set('user', $user);
                     $view = new Template();
                     echo $view->render('views/profile.html');
