@@ -1,6 +1,6 @@
 <?php
 
-public class dataLayer{
+class dataLayer{
 
     public static function getPlatforms(){
         return array(
