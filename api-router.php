@@ -121,7 +121,50 @@ $f3->route('PATCH /api/users/@username', function($f3, $params){
 });
 
 $f3->route('POST /api/games', function (){
+    $data = json_decode(file_get_contents("php://input"));
 
+    //Create game in database
+    $query = "INSERT INTO games (gameName, description, genre) VALUES (:gameName, :description, :genre)";
+
+    $statement = $GLOBALS['cnxn']->prepare($query);
+    $statement->bindParam(':gameName', $data->gameName, PDO::PARAM_STR);
+    $statement->bindParam(':description', $data->description, PDO::PARAM_STR);
+    $statement->bindParam(':genre', $data->genre, PDO::PARAM_STR);
+
+
+    if(!$statement->execute()){
+        http_response_code(503);
+
+        echo json_encode(array('message' => $statement->errorInfo()));
+    } else {
+
+        //Getting the new game ID
+        $query = "SELECT gameId FROM games where gameName = :gameName";
+        $statement = $GLOBALS['cnxn']->prepare($query);
+        $statement->bindParam(':gameName', $data->gameName, PDO::PARAM_STR);
+
+        $statement->execute();
+        $gameId = $statement->fetchColumn();
+
+        //Update game platforms
+        foreach ($data->platforms as $platformId){
+            $platformQuery = "INSERT INTO gamePlatforms (gameId, platformId) VALUES (:gameId, :platformId);";
+
+            $statement = $GLOBALS['cnxn']->prepare($platformQuery);
+            $statement->bindParam(":platformId", $platformId, PDO::PARAM_INT);
+            $statement->bindParam(":gameId", $gameId, PDO::PARAM_INT);
+
+            if(!$statement->execute()){
+                http_response_code(503);
+
+                echo json_encode(array('message' => $statement->errorInfo()));
+                die;
+            }
+        }
+        http_response_code(201);
+
+        echo json_encode(array('message' => 'Game created successfully'));
+    }
 });
 
 //run fat-free
