@@ -63,6 +63,9 @@ class Controller
 
     function registration()
     {
+        $userName = "";
+        $userEmail = "";
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $userName = $_POST['username'];
             $userPassword = $_POST['password'];
@@ -113,6 +116,9 @@ class Controller
                 }
             }
         }
+
+        $this->_f3->set('username', $userName);
+        $this->_f3->set('email', $userEmail);
 
         $view = new Template();
         echo $view->render('views/registration.html');
@@ -166,21 +172,45 @@ class Controller
         $view = new Template();
         echo $view->render('views/search.html');
     }
-}
 
-function adminAddGame(){
+    function adminAddGame(){
+        //if(!$_SESSION['user'] instanceof Admin){
+        //    header("Location: /game-tracker/");
+        //}
 
-    if($_SERVER['REQUEST_METHOD'] == POST){
-        if($_SESSION['user'] instanceof Admin){
-            // TODO Need to validate data
+        $gamePlatform = array();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if (!Validation::validString($_POST['title']))
+            {
+                $this->_f3->set('errors["title"]', "Please enter a title");
+            }
 
-            $_SESSION['user']->createGame($_POST);
-        } else {
-            header("Location: /game-tracker/");
+            if (!Validation::validString($_POST['description']))
+            {
+                $this->_f3->set('errors["description"]', "Please enter a description");
+            }
 
+            if (!Validation::validString($_POST['genre']))
+            {
+                $this->_f3->set('errors["genre"]', "Please enter a valid genre");
+            }
+
+            if (!Validation::validPlatform($_POST['platforms']))
+            {
+                $this->_f3->set('errors["platform"]', "Only valid platforms please");
+            }
+
+            if (empty($this->_f3->get('errors')))
+            {
+                $_SESSION['user']->createGame($_POST);
+            }
         }
-    }
 
-    $view = new Template();
-    echo $view->render('views/add-game.html');
+        $this->_f3->set('platforms', dataLayer::getPlatforms());
+        $this->_f3->set('gamePlatform', $gamePlatform);
+
+        $view = new Template();
+        echo $view->render('views/add-game.html');
+    }
 }
+

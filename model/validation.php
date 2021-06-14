@@ -16,4 +16,32 @@ class Validation
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
+
+    static function validPlatform($platforms)
+    {
+        $validPlatform = dataLayer::getPlatforms();
+        if (!empty($platforms))
+        {
+            foreach ($platforms as $platform)
+            {
+                if (!in_array($platform, $validPlatform))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    static function validString($string)
+    {
+        if (gettype($string) == "string")
+        {
+            if (!empty($string))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
