@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 01, 2021 at 06:25 PM
+-- Generation Time: Jun 13, 2021 at 08:19 PM
 -- Server version: 10.2.38-MariaDB
 -- PHP Version: 7.3.28
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `greatben_grc`
+-- Database: `dhardygr_game`
 --
 
 -- --------------------------------------------------------
@@ -29,9 +29,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `statuses` (
-  `statusId` int(11) NOT NULL,
-  `statusName` varchar(16) NOT NULL
+                            `statusId` int(11) NOT NULL,
+                            `statusName` varchar(16) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `statuses`
+--
+
+INSERT INTO `statuses` (`statusId`, `statusName`) VALUES
+(1, 'Backloged'),
+(2, 'In Progress'),
+(3, 'Completed'),
+(4, 'Dropped'),
+(5, 'On Hold');
 
 --
 -- Indexes for dumped tables
@@ -41,7 +52,7 @@ CREATE TABLE `statuses` (
 -- Indexes for table `statuses`
 --
 ALTER TABLE `statuses`
-  ADD PRIMARY KEY (`statusId`);
+    ADD PRIMARY KEY (`statusId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -51,7 +62,7 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `statusId` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `statusId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
