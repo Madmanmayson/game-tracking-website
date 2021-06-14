@@ -19,11 +19,7 @@ $f3->route('GET|POST /login', function(){
     $GLOBALS['con']->login();
 });
 
-$f3->route('GET /logout', function(){
-    $GLOBALS['con']->logout();
-});
-
-$f3->route('GET|POST /registration', function(){
+$f3->route('GET|POST /register', function(){
     $GLOBALS['con']->registration();
 });
 
@@ -43,6 +39,10 @@ $f3->route('GET /profile/@username', function($f3, $params){
 
 $f3->route('GET /search', function(){
     $GLOBALS['con']->search();
+});
+
+$f3->route('GET|POST /add-game', function(){
+    $GLOBALS['con']->adminAddGame();
 });
 
 $f3->run();

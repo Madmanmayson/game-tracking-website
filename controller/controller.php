@@ -167,3 +167,20 @@ class Controller
         echo $view->render('views/search.html');
     }
 }
+
+function adminAddGame(){
+
+    if($_SERVER['REQUEST_METHOD'] == POST){
+        if($_SESSION['user'] instanceof Admin){
+            // TODO Need to validate data
+
+            $_SESSION['user']->createGame($_POST);
+        } else {
+            header("Location: /game-tracker/");
+
+        }
+    }
+
+    $view = new Template();
+    echo $view->render('views/add-game.html');
+}

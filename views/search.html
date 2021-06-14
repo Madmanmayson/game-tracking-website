@@ -1,27 +1,47 @@
 <include href="views/header.html" />
+<style>
+    .add-box{
+        background-color: #85EA92;
+        display: block;
+        margin: 1.5rem 10%;
+        padding: .5rem 1rem;
+        border: 2px solid #12B347;
+        border-radius: 10px;
+    }
+
+    .game-box{
+        display: block;
+        margin: 0 .75rem 1rem .75rem;
+        padding: .5rem 1rem;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+
+    a.game-box, a.add-box{
+        color:black;
+        text-decoration: none;
+    }
+
+    a.game-box:hover{
+        background-color: rgba(0, 0, 0, .1);
+    }
+
+    a.add-box:hover{
+        background-color: #62E473;
+    }
+</style>
 
 <body>
 <include href="views/navbar.html" />
 
+<check if="{{ @SESSION.user instanceof Admin }}">
+    <a class="add-box" href="/game-tracker/add-game">
+        <h5 class="mb-1">Click here to add a game!</h5>
+    </a>
+</check>
+
 <div class="container mt-4">
-    <style>
-        .game-box{
-            display: block;
-            margin: 0 .75rem 1rem .75rem;
-            padding: .5rem 1rem;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
 
-        a.game-box{
-            color:black;
-            text-decoration: none;
-        }
-
-        a.game-box:hover{
-            background-color: rgba(0, 0, 0, .1);
-        }
-    </style>
     <h2>{{ ucfirst(@search) }}Search Results</h2>
 
     <form class="mb-4 w-100" method="get" action="/game-tracker/search">

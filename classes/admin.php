@@ -6,4 +6,8 @@ class Admin extends User
     {
         parent::__construct($databaseRow);
     }
+
+    public function createGame($gameData){
+
+    }
 }
