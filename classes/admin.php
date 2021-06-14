@@ -24,8 +24,8 @@ class Admin extends User
             switch ($http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) {
                 case 201:  # OK
                     //route to their profile
-
-                    header("Location: /game-tracker/games/{$data['gameId']}");
+                    $search = urlencode($_POST['gameName']);
+                    header("Location: /game-tracker/search?search={$search}");
                 default:
                     //route to an error page
                     //Back to registration for now
