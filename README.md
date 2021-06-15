@@ -35,3 +35,7 @@ Authors:
     - I think it's fair to say we went above and beyond for this project, and we both learned a lot
 11. BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
     - Our project incorporates fetch that access data via an API
+
+![UML](https://github.com/Madmanmayson/game-tracking-website/blob/master/readme/UML.png?raw=true)
+
+![ERD](https://github.com/Madmanmayson/game-tracking-website/blob/master/readme/ERD.png?raw=true)
