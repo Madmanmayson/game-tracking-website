@@ -6,6 +6,10 @@ A website for tracking progress and completion of games.
 
 [Ben Fuqua @B-Fuqua](https://github.com/B-Fuqua)
 
+## Accessing the Live Demo and Login Information
+- A live demo of the website can be accessed here: http://dhardy97.greenriverdev.com/game-tracker/
+- If you would like to sign in with an admin account to test admin features, the username is `Madmanmayson` and the password is `password`
+
 ## Notes
 - the `.htacces` has been altered from the one shown in class. The one we use routes any links with /api/ from the relative root to api-router.php and everything else to index.php
 - Every function that accesses the database does so through an HTTP request to the API. Not a single function in the main index.php router (or anywhere on the front end) has any access to the database. The two routers are just in the same project as we do not have access to a DNS to properly set CNAME and A records like you would on an actual web server. They are also in the same project so that you can easily see the database code without having to open another repo.
