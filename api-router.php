@@ -249,5 +249,28 @@ WHERE gameId = :gameId;";
     echo json_encode($gameData);
 });
 
+$f3->route('POST /api/users/@username/list', function($f3, $params){
+
+    //POST Should have gameId, userId, username, statusId
+
+    $query = "INSERT INTO userGameList (userId, gamePlatformId, rating, statusId) VALUES (:userId, :gamePlatformId, :rating, :statusId);";
+
+    $statement = $GLOBALS['cnxn']->prepare($query);
+    $statement->bindParam(':userId', $_POST['userId'], PDO::PARAM_INT);
+    $statement->bindParam(':gamePlatformId', $_POST['gamePlatformId'], PDO::PARAM_INT);
+    $statement->bindParam(':rating', $_POST['rating'], PDO::PARAM_INT);
+    $statement->bindParam(':statusId', $_POST['statusId'], PDO::PARAM_INT);
+
+    if($statement->execute()){
+        http_response_code(201);
+
+        echo json_encode(array('message' => 'Game added successfully'));
+    } else {
+        http_response_code(503);
+
+        echo json_encode(array('message' => $statement->errorInfo()));
+    }
+});
+
 //run fat-free
 $f3->run();
