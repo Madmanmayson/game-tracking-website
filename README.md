@@ -42,7 +42,7 @@ A website for tracking progress and completion of games.
 
 5. Has a history of commits from both team members to a Git repository. Commits are clearly commented.
    - 50 commits from Dylan (Madmanmayson)
-   - 36 commits from Ben (B-Fuqua)
+   - 37 commits from Ben (B-Fuqua)
 
 6. Uses OOP, and defines multiple classes, including at least one inheritance relationship.
    - OOP is used for all classes in the following folders: classes, controller, model.
@@ -54,6 +54,7 @@ A website for tracking progress and completion of games.
 
 8. Has full validation on the client side through JavaScript and server side through PHP.
    - Has server side validation through PHP (On the front end controller)
+   - Has client side validation through javascript
 
 9. All code is clean, clear, and well-commented. DRY (Don't Repeat Yourself) is practiced.
     - All functions and files are commented. Any code that was repeated was turned into a fucntion and called upon instead of repeating code
@@ -62,7 +63,7 @@ A website for tracking progress and completion of games.
     - I think it's fair to say we went above and beyond for this project, and we both learned a lot
 
 11. BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
-    - The entire project is build upon an API accessed through either cURL if done so in PHP or through Fetch if done so in JavaScript. Although we didn't use AJAX specificall, I believe that using either of those two should also satisfy the bonus requirement.
+    - The entire project is build upon an API accessed through either cURL if done so in PHP or through Fetch if done so in JavaScript. Although we didn't use AJAX specifically, I believe that using either of those two should also satisfy the bonus requirement.
 
 ## UML
 
