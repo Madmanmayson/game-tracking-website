@@ -252,8 +252,22 @@ WHERE gameId = :gameId;";
 });
 
 $f3->route('POST /api/users/@username/list', function($f3, $params){
-
     $data = json_decode(file_get_contents('php://input'), true);
+
+    //Check if it already exists
+    $query = "SELECT * FROM userGameList WHERE userId = :userId AND gamePlatformId = :gamePlatformId";
+
+    $statement = $GLOBALS['cnxn']->prepare($query);
+    $statement->bindParam(':userId', $data['userId'], PDO::PARAM_INT);
+    $statement->bindParam(':gamePlatformId', $data['gamePlatformId'], PDO::PARAM_INT);
+
+    $statement->execute();
+    if($statement->rowCount() > 0){
+        http_response_code('400');
+
+        echo json_encode(array('message' => 'This game is already on your list.'));
+        die;
+    }
 
     //POST Should have gameId, userId, username, statusId
 

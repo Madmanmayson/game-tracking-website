@@ -129,7 +129,7 @@ nav {
 }
 
 .container{
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.85);
     max-width: 1600px;
 
     padding-bottom: 3rem;
@@ -234,7 +234,7 @@ a.add-box:hover{
     position: absolute;
     z-index: 10;
     left: 50%;
-    top: 15%;
+    top: 10%;
     transform: translate(-50%, -50%);
     width: 30%;
     height: 40px;
