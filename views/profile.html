@@ -23,8 +23,7 @@
         <div class="col-4">
             <img class="profile-picture mx-auto d-block rounded-pill mb-3" id="avatar"
                  src="{{ !empty(@user->getAvatar()) ? @user->getAvatar() : '/game-tracker/images/avatar-placeholder.png' }}">
-            <p class="mb-4">Bio goes here spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam
-                spam spam spam spam spam spam spam spam spam</p>
+            <p class="mb-4">I have no idea what to put here so this is just my bio to take up space.</p>
 
             <check if="{{ isset(@SESSION.user) }}">
                 <button class="btn btn-success w-100" id="avatarUpload">
