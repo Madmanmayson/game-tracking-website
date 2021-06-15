@@ -9,6 +9,12 @@
     </a>
 </check>
 
+<div class="alert-box" id="alert">
+    <div class="d-flex align-items-center justify-content-center h-100">
+        <span id="alert-content">Success!!</span>
+    </div>
+</div>
+
 <div class="container pt-4">
 
     <h2>{{ ucfirst(@search) }}Search Results</h2>
@@ -67,6 +73,7 @@
 
 <include href="views/footer.html" />
 <include href="views/global-scripts.html" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/game-tracker/scripts/add-game.js"></script>
 </body>
 </html>

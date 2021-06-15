@@ -271,7 +271,7 @@ $f3->route('POST /api/users/@username/list', function($f3, $params){
     } else {
         http_response_code(503);
 
-        echo json_encode(array('message' => $statement->errorInfo()));
+        echo json_encode(array('message' => 'There was an error adding the game. Please try again later.'));
     }
 });
 

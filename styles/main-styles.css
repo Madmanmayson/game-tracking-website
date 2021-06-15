@@ -229,3 +229,27 @@ a.game-box:hover{
 a.add-box:hover{
     background-color: #62E473;
 }
+
+.alert-box{
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 40px;
+    text-align: center;
+
+    display: none;
+    border-radius: 10px;
+}
+
+.color-success{
+    background-color: lightgreen;
+    border: 2px solid darkgreen;
+}
+
+.color-failure{
+    background-color: lightpink;
+    border: 2px solid darkred;
+}
