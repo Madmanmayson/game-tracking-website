@@ -163,7 +163,7 @@ class Controller
         $partToRemove = substr($oldPath, strpos($oldPath, 'search'));
         $apiPath = substr($oldPath, 0, strlen($oldPath) - strlen($partToRemove));
 
-        $curl = curl_init("{$apiPath}api/games?search=" . $_GET['search']);
+        $curl = curl_init("{$apiPath}api/games?search=" . urlencode($_GET['search']));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($curl);

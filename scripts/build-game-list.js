@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 async function getGameListData(){
     let path = getApiDataUrl();
-    console.log(path);
 
     await fetch(path, {
         method: 'GET',
