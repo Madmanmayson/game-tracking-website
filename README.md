@@ -5,7 +5,7 @@ Authors:
 - Dylan Hardy
 - Ben Fuqua
 
-#Project Requirements
+# Project Requirements
 1. Separates all database/business logic using the MVC pattern.
    - logic is under the model folder
     - All HTML is under views folder
