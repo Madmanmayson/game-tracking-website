@@ -276,7 +276,32 @@ $f3->route('POST /api/users/@username/list', function($f3, $params){
 });
 
 $f3->route('GET /api/users/@username/list', function($f3, $params){
+    $query = "SELECT gameId, gameName, platformName, description, statusName FROM userGameList
+              INNER JOIN statuses ON statuses.statusId = userGameList.statusId
+              INNER JOIN users ON users.userId = userGameList.userId
+              INNER JOIN gamePlatforms ON gamePlatforms.gamePlatformId = userGameList.gamePlatformId
+              INNER JOIN games ON games.gameId = gamePlatforms.gameId
+              INNER JOIN platforms ON platforms.platformId = gamePlatforms.platformId
+              WHERE users.username = :username";
 
+    $statement = $GLOBALS['cnxn']->prepare($query);
+    $statement->bindParam(':username', $params['username'], PDO::PARAM_STR);
+
+    $statement->execute();
+    if($statement->rowCount() > 0) {
+        $output = array();
+
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            array_push($output, $row);
+        }
+        http_response_code(200);
+
+        echo json_encode($output);
+    } else {
+        http_response_code(404);
+
+        echo json_encode(array("message" => "Game list is empty."));
+    }
 });
 
 //run fat-free
