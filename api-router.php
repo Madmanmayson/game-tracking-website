@@ -276,7 +276,7 @@ $f3->route('POST /api/users/@username/list', function($f3, $params){
 });
 
 $f3->route('GET /api/users/@username/list', function($f3, $params){
-    $query = "SELECT gameId, gameName, platformName, description, statusName FROM userGameList
+    $query = "SELECT userGameList.gamePlatformId, gameName, platformName, description, statusName FROM userGameList
               INNER JOIN statuses ON statuses.statusId = userGameList.statusId
               INNER JOIN users ON users.userId = userGameList.userId
               INNER JOIN gamePlatforms ON gamePlatforms.gamePlatformId = userGameList.gamePlatformId

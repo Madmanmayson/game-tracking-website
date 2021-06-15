@@ -9,12 +9,15 @@
         <!-- Trying for a 8-4 split theme for the entire website when using 2 columns -->
         <div class="col-8 px-3">
             <h2 class="pb-3">{{ @user->getUserName() }}'s Game List</h2>
-            <div class="row filter-bar mx-0">
+            <div class="row filter-bar mx-0 mb-4">
                 <span class="col filter">Option 1</span>
                 <span class="col filter">Option 2</span>
                 <span class="col filter">Option 3</span>
                 <span class="col filter">Option 4</span>
                 <span class="col filter">Option 5</span>
+            </div>
+            <div id="gameList">
+
             </div>
         </div>
         <div class="col-4">
@@ -56,10 +59,26 @@
     </div>
 </div>
 
+<template id="gameTemplate">
+    <a class="game-box" href="#" id="gameId">
+        <div class="d-flex flex-row">
+            <div class="d-flex flex-column flex-grow-1">
+                <span><b id="title">Game Title</b> - <span id="platform">Platform</span></span>
+                <p class="mb-1" id="description">Description</p>
+            </div>
+            <div class="d-flex align-items-center">
+                <h5 id="status">Status</h5>
+
+            </div>
+        </div>
+    </a>
+</template>
+
 <include href="views/footer.html"/>
 <include href="views/global-scripts.html"/>
 <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 <script src="/game-tracker/scripts/upload-image.js"></script>
+<script src="/game-tracker/scripts/build-game-list.js"></script>
 <script>
     $(document).ready(function () {
         bsCustomFileInput.init()
