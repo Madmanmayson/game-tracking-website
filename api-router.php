@@ -101,8 +101,7 @@ $f3->route('PATCH /api/users/@username', function($f3, $params){
         //Getting MIME type and extension info
         $finfo = finfo_open();
         $mimeType = finfo_buffer($finfo, $imagedata, FILEINFO_MIME_TYPE);
-        $mimeExtensions = finfo_buffer($finfo, $imagedata, FILEINFO_EXTENSION);
-        $extension = explode('/', $mimeExtensions)[0]; //Get the first extension of all possible ones for the MIME type
+        $extension = mime2ext($mimeType);
 
         if (explode('/', $mimeType)[0] != 'image') {
             http_response_code(400);
@@ -227,13 +226,12 @@ $f3->route('GET /api/games/@gameId', function($f3, $params){
 
     $gameData = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $platformQuery = "SELECT platformName FROM platforms
+    $platformQuery = "SELECT gamePlatformId, platformName FROM platforms
 INNER JOIN gamePlatforms ON platforms.platformId = gamePlatforms.platformId
 WHERE gameId = :gameId;";
 
     $statement = $GLOBALS['cnxn']->prepare($platformQuery);
     $statement->bindParam(':gameId', $params['gameId'], PDO::PARAM_INT);
-
 
     if(!$statement->execute()){
         http_response_code(404);
@@ -241,7 +239,11 @@ WHERE gameId = :gameId;";
         echo json_encode(array("message" => "Game Id doesn't exist."));
         die;
     }
-    $platforms = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+    $platforms = array();
+
+    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        array_push($platforms, $row);
+    }
     $gameData['platforms'] = $platforms;
 
     http_response_code(200);
@@ -251,15 +253,16 @@ WHERE gameId = :gameId;";
 
 $f3->route('POST /api/users/@username/list', function($f3, $params){
 
+    $data = json_decode(file_get_contents('php://input'), true);
+
     //POST Should have gameId, userId, username, statusId
 
-    $query = "INSERT INTO userGameList (userId, gamePlatformId, rating, statusId) VALUES (:userId, :gamePlatformId, :rating, :statusId);";
+    $query = "INSERT INTO userGameList (userId, gamePlatformId, statusId) VALUES (:userId, :gamePlatformId, :statusId);";
 
     $statement = $GLOBALS['cnxn']->prepare($query);
-    $statement->bindParam(':userId', $_POST['userId'], PDO::PARAM_INT);
-    $statement->bindParam(':gamePlatformId', $_POST['gamePlatformId'], PDO::PARAM_INT);
-    $statement->bindParam(':rating', $_POST['rating'], PDO::PARAM_INT);
-    $statement->bindParam(':statusId', $_POST['statusId'], PDO::PARAM_INT);
+    $statement->bindParam(':userId', $data['userId'], PDO::PARAM_INT);
+    $statement->bindParam(':gamePlatformId', $data['gamePlatformId'], PDO::PARAM_INT);
+    $statement->bindParam(':statusId', $data['statusId'], PDO::PARAM_INT);
 
     if($statement->execute()){
         http_response_code(201);
@@ -272,5 +275,36 @@ $f3->route('POST /api/users/@username/list', function($f3, $params){
     }
 });
 
+$f3->route('GET /api/users/@username/list', function($f3, $params){
+
+});
+
 //run fat-free
 $f3->run();
+
+//Using external MIME map cause built in PHP MIME map is lacking
+//https://stackoverflow.com/questions/16511021/convert-mime-type-to-file-extension-php/53662733
+function mime2ext($mime)
+{
+    $mime_map = [
+        'image/bmp' => 'bmp',
+        'image/x-bmp' => 'bmp',
+        'image/x-bitmap' => 'bmp',
+        'image/x-xbitmap' => 'bmp',
+        'image/x-win-bitmap' => 'bmp',
+        'image/x-windows-bmp' => 'bmp',
+        'image/ms-bmp' => 'bmp',
+        'image/x-ms-bmp' => 'bmp',
+        'application/bmp' => 'bmp',
+        'application/x-bmp' => 'bmp',
+        'application/x-win-bitmap' => 'bmp',
+        'image/gif' => 'gif',
+        'image/jpeg' => 'jpeg',
+        'image/pjpeg' => 'jpeg',
+        'image/png' => 'png',
+        'image/x-png' => 'png',
+        'image/webp' => 'webp',
+    ];
+
+    return isset($mime_map[$mime]) ? $mime_map[$mime] : false;
+}

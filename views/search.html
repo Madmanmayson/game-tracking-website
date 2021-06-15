@@ -9,7 +9,7 @@
     </a>
 </check>
 
-<div class="container mt-4">
+<div class="container pt-4">
 
     <h2>{{ ucfirst(@search) }}Search Results</h2>
 
@@ -23,7 +23,7 @@
     </form>
 
     <repeat group="{{ @games }}" value="{{ @game }}">
-        <a class="game-box" href="/game-tracker/games/{{ @game->getGameId() }}">
+        <a class="game-box" href="#" id="{{ @game->getGameId() }}" onclick="openDialogue({{ @game->getGameId() }})">
             <div class="d-flex flex-column">
                 <span><b>{{ @game->getGameName() }}</b> - {{ @game->getGenre() }}</span>
                 <p class="mb-1">{{ @game->getDescription() }}</p>
@@ -32,8 +32,41 @@
     </repeat>
 </div>
 
+<div id="overlay" class="overlay" onclick="closeDialogue()"></div>
+
+<div id="addGameBox" class="dialog-container d-flex flex-column">
+    <div class="d-flex justify-content-between align-items-start">
+        <h2>Add Game to Your List</h2>
+        <button class="close-button" onclick="closeDialogue()">&times;</button>
+    </div>
+    <hr class="w-100">
+    <h4 id="gameTitle">Game Title</h4>
+    <div class="row">
+        <div class="col form-group">
+            <label for="platform">Select a Platform:</label>
+            <select class="custom-select" id="platform">
+                <option value="1">Playstation</option>
+                <option value="2">Playstation</option>
+                <option value="3">Playstation</option>
+            </select>
+        </div>
+        <div class="col form-group">
+            <label for="status">Select a Status:</label>
+            <select class="custom-select" id="status">
+                <option value="1">Backlogged</option>
+                <option value="2">In Progress</option>
+                <option value="3">Completed</option>
+                <option value="4">Dropped</option>
+                <option value="5">On Hold</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-primary" id="upload">Add to List</button>
+</div>
+
 
 <include href="views/footer.html" />
 <include href="views/global-scripts.html" />
+<script src="/game-tracker/scripts/add-game.js"></script>
 </body>
 </html>
