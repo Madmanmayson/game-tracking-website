@@ -34,8 +34,8 @@ Authors:
 10. Your submission shows adequate effort for a final project in a full-stack web development course.
     - I think it's fair to say we went above and beyond for this project, and we both learned a lot
 11. BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
-    - Our project incorporates fetch that access data via an API
+    - Our project incorporates Fetch API from raw javascript to access our serverside API for getting data.
 
-![UML](https://github.com/Madmanmayson/game-tracking-website/blob/master/readme/UML.png?raw=true)
+![UML](https://raw.githubusercontent.com/Madmanmayson/game-tracking-website/master/readme/UML.PNG)
 
-![ERD](https://github.com/Madmanmayson/game-tracking-website/blob/master/readme/ERD.png?raw=true)
+![ERD](https://raw.githubusercontent.com/Madmanmayson/game-tracking-website/master/readme/ERD.PNG)
