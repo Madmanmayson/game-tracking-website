@@ -6,10 +6,11 @@
 <div class="container short_container" id="registration">
     <div class="loginBox">
         <h2 class="text-center">Registration</h2>
-        <form class="login" action="#" method="post">
+        <form class="login" action="#" method="post" id="accountForm">
             <div class="form-group">
                 <label for="userName">Username</label>
                 <input class="form-control" id="username" name="username" value="{{ @username }}">
+                <span class="jsErr" id="err-username">Please enter a valid username</span>
                 <check if="{{ isset(@errors['username']) }}">
                     <span class="err">{{ @errors['username'] }}</span>
                 </check>
@@ -17,6 +18,7 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password">
+                <span class="jsErr" id="err-password">Please enter a valid password</span>
                 <check if="{{ isset(@errors['password']) }}">
                     <span class="err">{{ @errors['password'] }}</span>
                 </check>
@@ -24,6 +26,7 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="{{ @email }}">
+                <span class="jsErr" id="err-email">Please enter a valid email</span>
                 <check if="{{ isset(@errors['email']) }}">
                     <span class="err">{{ @errors['email'] }}</span>
                 </check>
@@ -34,5 +37,6 @@
 </div>
 <include href="views/footer.html"/>
 <include href="views/global-scripts.html" />
+<script src="/game-tracker/scripts/validateAccount.js"></script>
 </body>
 </html>

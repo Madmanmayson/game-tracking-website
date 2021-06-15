@@ -8,11 +8,12 @@
 <div class="container short_container">
     <div class="loginBox mw-100">
         <h1>Game insertion form</h1>
-        <form action="#" method="post">
+        <form action="#" method="post" id="gameForm">
             <div class="row">
                 <div class="col-12">
                     <label for="title"><h4>Title</h4></label>
                     <input type="text" class="form-control" id="title" name="gameName">
+                    <span class="jsErr" id="err-title">Please enter a valid title</span>
                     <check if="{{ isset(@errors['title']) }}">
                         <span class="err">{{ @errors['title'] }}</span>
                     </check>
@@ -23,6 +24,7 @@
                     <label for="description"><h4>Description</h4></label>
                     <textarea class="form-control" id="description"
                               name="description" rows="3" maxlength="255"></textarea>
+                    <span class="jsErr" id="err-description">Please enter a valid description</span>
                     <check if="{{ isset(@errors['description']) }}">
                         <span class="err">{{ @errors['description'] }}</span>
                     </check>
@@ -32,6 +34,7 @@
                 <div class="col-md-12 col-lg-6">
                     <label for="genre"><h4>Genre</h4></label>
                     <input type="text" class="form-control" id="genre" name="genre">
+                    <span class="jsErr" id="err-genre">Please enter a valid genre</span>
                     <check if="{{ isset(@errors['genre']) }}">
                         <span class="err">{{ @errors['genre'] }}</span>
                     </check>
@@ -48,6 +51,7 @@
                             </div>
                         </repeat>
                     </div>
+                    <span class="jsErr" id="err-platform">Please select at least one platform</span>
                     <check if="{{ isset(@errors['platform']) }}">
                         <span class="err">{{ @errors['platform'] }}</span>
                     </check>
@@ -66,5 +70,6 @@
 
 <include href="views/footer.html" />
 <include href="views/global-scripts.html" />
+<script src="/game-tracker/scripts/validateGame.js"></script>
 </body>
 </html>
